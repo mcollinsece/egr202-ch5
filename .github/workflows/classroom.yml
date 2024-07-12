@@ -13,85 +13,49 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: lab4-2
-      id: lab4-2
+    - name: lab5-3
+      id: lab5-3
       uses: classroom-resources/autograding-io-grader@v1
       with:
-        test-name: lab4-2
+        test-name: lab5-3
         setup-command: ''
-        command: make clean && make test_lab4-2 && make lab4-2 && ./test_files/test_lab4-2
+        command: make clean && make test_lab5-3 && make lab5-3 && ./test_files/test_lab5-3
         input: ''
         expected-output: Test passed!
         comparison-method: contains
         timeout: 10
         max-score: 1
-    - name: lab4-3
-      id: lab4-3
+    - name: lab5-6
+      id: lab5-6
       uses: classroom-resources/autograding-io-grader@v1
       with:
-        test-name: lab4-3
+        test-name: lab5-6
         setup-command: ''
-        command: make clean && make test_lab4-3 && make lab4-3 && ./test_files/test_lab4-3
+        command: make clean && make test_lab5-6 && make lab5-6 && ./test_files/test_lab5-6
         input: ''
         expected-output: Test passed!
         comparison-method: contains
         timeout: 10
         max-score: 1
-    - name: lab4-4
-      id: lab4-4
+    - name: hw5-12
+      id: hw5-12
       uses: classroom-resources/autograding-io-grader@v1
       with:
-        test-name: lab4-4
+        test-name: hw5-12
         setup-command: ''
-        command: make clean && make test_lab4-4 && make lab4-4 && ./test_files/test_lab4-4
+        command: make clean && make test_hw5-12 && make hw5-12 && ./test_files/test_hw5-12
         input: ''
         expected-output: Test passed!
         comparison-method: contains
         timeout: 10
         max-score: 1
-    - name: lab4-6
-      id: lab4-6
+    - name: hw5-15
+      id: hw5-15
       uses: classroom-resources/autograding-io-grader@v1
       with:
-        test-name: lab4-6
+        test-name: hw5-15
         setup-command: ''
-        command: make clean && make test_lab4-6 && make lab4-6 && ./test_files/test_lab4-6
-        input: ''
-        expected-output: Test passed!
-        comparison-method: contains
-        timeout: 10
-        max-score: 1
-    - name: hw4-11
-      id: hw4-11
-      uses: classroom-resources/autograding-io-grader@v1
-      with:
-        test-name: hw4-11
-        setup-command: ''
-        command: make clean && make test_hw4-11 && make hw4-11 && ./test_files/test_hw4-11
-        input: ''
-        expected-output: Test passed!
-        comparison-method: contains
-        timeout: 10
-        max-score: 1
-    - name: hw4-14
-      id: hw4-14
-      uses: classroom-resources/autograding-io-grader@v1
-      with:
-        test-name: hw4-14
-        setup-command: ''
-        command: make clean && make test_hw4-14 && make hw4-14 && ./test_files/test_hw4-14
-        input: ''
-        expected-output: Test passed!
-        comparison-method: contains
-        timeout: 10
-        max-score: 1
-    - name: hw4-16
-      id: hw4-16
-      uses: classroom-resources/autograding-io-grader@v1
-      with:
-        test-name: hw4-16
-        setup-command: ''
-        command: make clean && make test_hw4-16 && make hw4-16 && ./test_files/test_hw4-16
+        command: make clean && make test_hw5-15 && make hw5-15 && ./test_files/test_hw5-15
         input: ''
         expected-output: Test passed!
         comparison-method: contains
@@ -100,12 +64,9 @@ jobs:
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
-        LAB4-2_RESULTS: "${{steps.lab4-2.outputs.result}}"
-        LAB4-3_RESULTS: "${{steps.lab4-3.outputs.result}}"
-        LAB4-4_RESULTS: "${{steps.lab4-4.outputs.result}}"
-        LAB4-6_RESULTS: "${{steps.lab4-6.outputs.result}}"
-        HW4-11_RESULTS: "${{steps.hw4-11.outputs.result}}"
-        HW4-14_RESULTS: "${{steps.hw4-14.outputs.result}}"
-        HW4-16_RESULTS: "${{steps.hw4-16.outputs.result}}"
+        LAB5-3_RESULTS: "${{steps.lab5-3.outputs.result}}"
+        LAB5-6_RESULTS: "${{steps.lab5-6.outputs.result}}"
+        HW5-12_RESULTS: "${{steps.hw5-12.outputs.result}}"
+        HW5-15_RESULTS: "${{steps.hw5-15.outputs.result}}"
       with:
-        runners: lab4-2,lab4-3,lab4-4,lab4-6,hw4-11,hw4-14,hw4-16
+        runners: lab5-3,lab5-6,hw5-12,hw5-15
