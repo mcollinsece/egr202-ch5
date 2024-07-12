@@ -1,0 +1,111 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: lab4-2
+      id: lab4-2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: lab4-2
+        setup-command: ''
+        command: make clean && make test_lab4-2 && make lab4-2 && ./test_files/test_lab4-2
+        input: ''
+        expected-output: Test passed!
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: lab4-3
+      id: lab4-3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: lab4-3
+        setup-command: ''
+        command: make clean && make test_lab4-3 && make lab4-3 && ./test_files/test_lab4-3
+        input: ''
+        expected-output: Test passed!
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: lab4-4
+      id: lab4-4
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: lab4-4
+        setup-command: ''
+        command: make clean && make test_lab4-4 && make lab4-4 && ./test_files/test_lab4-4
+        input: ''
+        expected-output: Test passed!
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: lab4-6
+      id: lab4-6
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: lab4-6
+        setup-command: ''
+        command: make clean && make test_lab4-6 && make lab4-6 && ./test_files/test_lab4-6
+        input: ''
+        expected-output: Test passed!
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: hw4-11
+      id: hw4-11
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: hw4-11
+        setup-command: ''
+        command: make clean && make test_hw4-11 && make hw4-11 && ./test_files/test_hw4-11
+        input: ''
+        expected-output: Test passed!
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: hw4-14
+      id: hw4-14
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: hw4-14
+        setup-command: ''
+        command: make clean && make test_hw4-14 && make hw4-14 && ./test_files/test_hw4-14
+        input: ''
+        expected-output: Test passed!
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: hw4-16
+      id: hw4-16
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: hw4-16
+        setup-command: ''
+        command: make clean && make test_hw4-16 && make hw4-16 && ./test_files/test_hw4-16
+        input: ''
+        expected-output: Test passed!
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        LAB4-2_RESULTS: "${{steps.lab4-2.outputs.result}}"
+        LAB4-3_RESULTS: "${{steps.lab4-3.outputs.result}}"
+        LAB4-4_RESULTS: "${{steps.lab4-4.outputs.result}}"
+        LAB4-6_RESULTS: "${{steps.lab4-6.outputs.result}}"
+        HW4-11_RESULTS: "${{steps.hw4-11.outputs.result}}"
+        HW4-14_RESULTS: "${{steps.hw4-14.outputs.result}}"
+        HW4-16_RESULTS: "${{steps.hw4-16.outputs.result}}"
+      with:
+        runners: lab4-2,lab4-3,lab4-4,lab4-6,hw4-11,hw4-14,hw4-16
