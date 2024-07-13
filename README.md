@@ -1,4 +1,23 @@
-# egr202-ch5-solutions-
+
+# These assignments directly correspond with assignments in your book. For further details and references, please refer to the approriate sections in your textbook, and if you need further clarification, please reach out.
+
+# Lab 5-2 Plan and Create
+
+1. **Read textbook pages 138 through 142. Note that your book gives instructions for setting up development tools and a development environment. Ignore those instructions. We are using Replit instead. Figure 5-29 on page 142 gives the final C++ instructions to be submitted. Please do not just copy and paste. Working through Lab 5-2 will get you used to developing, building, testing, and pushing/submitting your code**i
+
+2. **Test the program using the same data used to desk-check the program. You can compile and run your code with the following commands:**
+```
+make clean
+make lab5-2
+./lab5-2
+```
+**You can also use the unit test for testing your code by running the following:** 
+``` 
+make test_lab5-2
+./test_files/test_lab5-2
+```
+
+3. **When you are done, push your code to the Github classroom. A Github Action will grade your lab.**
 
 
 # Lab 5-3 Modify
@@ -63,7 +82,7 @@ make test_hw5-12
 ```
 ![Figure 5-27](images/figure5_27.png)
 
-# Homework 5-15
+# Homework 5-12
 
 **A third-grade teacher at Potter Elementary School wants a program that allows a student to enter the amount of money a customer owes and the amount of money the customer paid. The program should calculate and display the amount of change, as well as how many dollars, quarters, dimes, nickels, and pennies to return to the customer. Display an appropriate message when the amount paid is less than the amount owed.**
 
@@ -73,15 +92,5 @@ make test_hw5-12
 
 3. **Desk-check the program using the same data used to desk-check the algorithm.**
 
-4. **Write the C++ instructions necessary in Replit to display the change in fixed-point notation with two decimal places. Display the remaining output in fixed-point notation with no decimal places. Test the program using the same data used to desk-check the program. You can compile and run your code with the following commands:**
-
-```
-make clean
-make hw5-15
-./hw5-15
-```
-**You can also use the unit test for testing your code by running the following:** 
-``` 
-make test_hw5-15
-./test_files/test_hw5-15
-```
+4. **Write the C++ instructions necessary in Replit to display the change in fixed-point notation with two decimal places. Display the remaining output in fixed-point notation 
+with no decimal places. Test the program using the same data used to desk-check the program.**
