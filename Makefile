@@ -10,7 +10,7 @@ hw4-14: hw5-15.cpp
 	$(CXX) $(CXXFLAGS) hw5-15.cpp -o hw5-15
 
 lab5-2: lab5-2.cpp
-	$(CXX) $(CXXFLAGS) lab5-2.cpp -o lab2-3	
+	$(CXX) $(CXXFLAGS) lab5-2.cpp -o lab5-2
 
 lab5-3: lab5-3.cpp
 	$(CXX) $(CXXFLAGS) lab5-3.cpp -o lab5-3	
