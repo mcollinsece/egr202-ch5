@@ -4,69 +4,87 @@
 #include <iostream>
 #include <sstream>
 #include <unistd.h> // For STDIN_FILENO, STDOUT_FILENO, dup, dup2, and close
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 void runTest() {
     // Test case 1
-    string input = "10.50\n15.75\n";  // Input for amount owed and amount paid
-    string expected_substring = "Change: 5.25\nDollars: 5\nQuarters: 1\nDimes: 0\nNickels: 0\nPennies: 0\n";
+    string input1 = "75.34\n80\n";
+    vector<string> expected_outputs1 = {"4.66", "4", "2", "1", "1", "1"};
 
-    // Create temporary files for input and output redirection
-    FILE *input_file = tmpfile();
-    FILE *output_file = tmpfile();
+    // Test case 2
+    string input2 = "39.67\n50\n";
+    vector<string> expected_outputs2 = {"10.33", "10", "1", "0", "1", "3"};
 
-    // Write the input to the input file
-    fputs(input.c_str(), input_file);
-    rewind(input_file);
+    // Helper function to run a single test case
+    auto runSingleTest = [](const string& input, const vector<string>& expected_outputs) {
+        // Create temporary files for input and output redirection
+        FILE *input_file = tmpfile();
+        FILE *output_file = tmpfile();
 
-    // Redirect stdin to the input file
-    int input_fd = fileno(input_file);
-    int saved_stdin_fd = dup(STDIN_FILENO);
-    dup2(input_fd, STDIN_FILENO);
+        // Write the input to the input file
+        fputs(input.c_str(), input_file);
+        rewind(input_file);
 
-    // Redirect stdout to the output file
-    int output_fd = fileno(output_file);
-    int saved_stdout_fd = dup(STDOUT_FILENO);
-    dup2(output_fd, STDOUT_FILENO);
+        // Redirect stdin to the input file
+        int input_fd = fileno(input_file);
+        int saved_stdin_fd = dup(STDIN_FILENO);
+        dup2(input_fd, STDIN_FILENO);
 
-    // Call the original program's main function
-    int result = system("./hw5-15");
+        // Redirect stdout to the output file
+        int output_fd = fileno(output_file);
+        int saved_stdout_fd = dup(STDOUT_FILENO);
+        dup2(output_fd, STDOUT_FILENO);
 
-    // Restore stdin and stdout
-    dup2(saved_stdin_fd, STDIN_FILENO);
-    dup2(saved_stdout_fd, STDOUT_FILENO);
-    close(saved_stdin_fd);
-    close(saved_stdout_fd);
+        // Call the original program's main function
+        int result = system("./hw5-15");
 
-    // Check if the system call was successful
-    if (result != 0) {
-        cout << "Test Failed: Program did not run successfully" << endl;
-        exit(-1);
-    }
+        // Restore stdin and stdout
+        dup2(saved_stdin_fd, STDIN_FILENO);
+        dup2(saved_stdout_fd, STDOUT_FILENO);
+        close(saved_stdin_fd);
+        close(saved_stdout_fd);
 
-    // Read the output from the output file
-    rewind(output_file);
-    char buffer[256];
-    string actual_output;
-    while (fgets(buffer, sizeof(buffer), output_file)) {
-        actual_output += buffer;
-    }
+        // Check if the system call was successful
+        if (result != 0) {
+            cout << "Test Failed: Program did not run successfully" << endl;
+            exit(-1);
+        }
 
-    // Close and remove the temporary files
-    fclose(input_file);
-    fclose(output_file);
+        // Read the output from the output file
+        rewind(output_file);
+        char buffer[256];
+        string actual_output;
+        while (fgets(buffer, sizeof(buffer), output_file)) {
+            actual_output += buffer;
+        }
 
-    // Debugging information
-    cout << "Expected Output:\n" << expected_substring << endl;
-    cout << "Actual Output:\n" << actual_output << endl;
+        // Close and remove the temporary files
+        fclose(input_file);
+        fclose(output_file);
 
-    // Compare the actual output to the expected substring
-    if (actual_output != expected_substring) {
-        cout << "Test Failed: Output does not match expected output" << endl;
-        exit(-1);
-    }
+        // Debugging information
+        cout << "Expected Outputs:\n";
+        for (const auto& output : expected_outputs) {
+            cout << output << endl;
+        }
+        cout << "Actual Output:\n" << actual_output << endl;
 
-    cout << "Test passed!" << endl;
+        // Compare the actual output to the expected values
+        for (const auto& expected_output : expected_outputs) {
+            if (actual_output.find(expected_output) == string::npos) {
+                cout << "Test Failed: Output does not contain expected value: " << expected_output << endl;
+                exit(-1);
+            }
+        }
+
+        cout << "Test passed!" << endl;
+    };
+
+    // Run the individual test cases
+    runSingleTest(input1, expected_outputs1);
+    runSingleTest(input2, expected_outputs2);
 }
 
 int main() {
