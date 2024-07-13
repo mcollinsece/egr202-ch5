@@ -1,4 +1,4 @@
-all: hw5-12 hw5-15 test_hw5-12 test_hw5-15 lab5-2 lab5-3 lab5-6 test_lab5-2 test_lab5-3 test_lab5-6
+all: hw5-12 test_hw5-12 lab5-2 lab5-3 lab5-6 test_lab5-2 test_lab5-3 test_lab5-6
 
 CXX = clang++
 CXXFLAGS = -std=c++14 -Wall -Werror
