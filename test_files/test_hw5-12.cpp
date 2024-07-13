@@ -7,10 +7,16 @@
 using namespace std;
 
 void runTest() {
-    // Test case 1
-    string input = "10.50\n15.75\n";  // Input for item prices
-    string expected_substring = "20.88";  // Expected substring in the output
+  // Test case 1
+  string input1 = "24.99\n10\n";
+  string expected_output1 = "29.99";
+  
+  // Test case 2
+  string input2 = "11.50\n30.99\n";
+  string expected_output2 = "36.74";
 
+  // Helper function to run a single test case
+  auto runSingleTest = [](const string& input, const string& expected_output) {
     // Create temporary files for input and output redirection
     FILE *input_file = tmpfile();
     FILE *output_file = tmpfile();
@@ -40,8 +46,8 @@ void runTest() {
 
     // Check if the system call was successful
     if (result != 0) {
-        cout << "Test Failed: Program did not run successfully" << endl;
-        exit(-1);
+      cout << "Test Failed: Program did not run successfully" << endl;
+      exit(-1);
     }
 
     // Read the output from the output file
@@ -49,7 +55,7 @@ void runTest() {
     char buffer[256];
     string actual_output;
     while (fgets(buffer, sizeof(buffer), output_file)) {
-        actual_output += buffer;
+      actual_output += buffer;
     }
 
     // Close and remove the temporary files
@@ -57,27 +63,32 @@ void runTest() {
     fclose(output_file);
 
     // Debugging information
-    cout << "Expected Substring:\n" << expected_substring << endl;
+    cout << "Expected Output:\n" << expected_output << endl;
     cout << "Actual Output:\n" << actual_output << endl;
 
-    // Compare the actual output to the expected substring
-    if (actual_output.find(expected_substring) == string::npos) {
-        cout << "Test Failed: Output does not contain expected substring" << endl;
-        exit(-1);
+    // Compare the actual output to the expected value
+    if (actual_output.find(expected_output) == string::npos) {
+      cout << "Test Failed: Output does not contain expected value" << endl;
+      exit(-1);
     }
 
     cout << "Test passed!" << endl;
+  };
+
+  // Run the individual test cases
+  runSingleTest(input1, expected_output1);
+  runSingleTest(input2, expected_output2);
 }
 
 int main() {
-    try {
-        runTest();
-    } catch (const exception &e) {
-        cout << "Test Failed: " << e.what() << endl;
-        return -1;
-    } catch (...) {
-        cout << "Test Failed: Unknown error occurred" << endl;
-        return -1;
-    }
-    return 0;
+  try {
+    runTest();
+  } catch (const exception &e) {
+    cout << "Test Failed: " << e.what() << endl;
+    return -1;
+  } catch (...) {
+    cout << "Test Failed: Unknown error occurred" << endl;
+    return -1;
+  }
+  return 0;
 }
