@@ -1,4 +1,4 @@
-//lab5-3.cpp - displays the total amount due
+//lab5-2.cpp - displays the total amount due
 //Created/revised by <your name> on <current date>
 
 #include <iostream>
