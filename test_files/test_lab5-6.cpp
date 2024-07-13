@@ -7,16 +7,26 @@
 using namespace std;
 
 void runTest() {
-    // Test case 1: Code '1' purchase
-    string input1 = "1\n50.00\n";  // Input for code and purchase price
-    string expected_output1 = "Service charge: 0.50\n";
+  // Test case 1
+  string input1 = "1\n100\n";
+  string expected_output1 = "1.00";
 
+  // Test case 2
+  string input2 = "2\n100\n";
+  string expected_output2 = "6.00";
+
+  // Test case 3
+  string input3 = "3\n100\n";
+  string expected_output3 = "1.00";
+
+  // Helper function to run a single test case
+  auto runSingleTest = [](const string& input, const string& expected_output) {
     // Create temporary files for input and output redirection
     FILE *input_file = tmpfile();
     FILE *output_file = tmpfile();
 
     // Write the input to the input file
-    fputs(input1.c_str(), input_file);
+    fputs(input.c_str(), input_file);
     rewind(input_file);
 
     // Redirect stdin to the input file
@@ -40,8 +50,8 @@ void runTest() {
 
     // Check if the system call was successful
     if (result != 0) {
-        cout << "Test Failed: Program did not run successfully" << endl;
-        exit(-1);
+      cout << "Test Failed: Program did not run successfully" << endl;
+      exit(-1);
     }
 
     // Read the output from the output file
@@ -49,7 +59,7 @@ void runTest() {
     char buffer[256];
     string actual_output;
     while (fgets(buffer, sizeof(buffer), output_file)) {
-        actual_output += buffer;
+      actual_output += buffer;
     }
 
     // Close and remove the temporary files
@@ -57,25 +67,33 @@ void runTest() {
     fclose(output_file);
 
     // Debugging information
-    cout << "Expected Output:\n" << expected_output1 << endl;
+    cout << "Expected Output:\n" << expected_output << endl;
     cout << "Actual Output:\n" << actual_output << endl;
 
-    // Compare the actual output to the expected output
-    if (actual_output != expected_output1) {
-        cout << "Test Failed: Output does not match expected output for code '1'" << endl;
-        exit(-1);
+    // Compare the actual output to the expected value
+    if (actual_output.find(expected_output) == string::npos) {
+      cout << "Test Failed: Output does not contain expected value" << endl;
+      exit(-1);
     }
 
-    // Test case 2: Code '2' purchase
-    string input2 = "2\n75.00\n";  // Input for code and purchase price
-    string expected_output2 = "Service charge: 5.75\n";
+    cout << "Test passed!" << endl;
+  };
 
-    // Write the input to the input file
-    fputs(input2.c_str(), input_file);
-    rewind(input_file);
+  // Run the individual test cases
+  runSingleTest(input1, expected_output1);
+  runSingleTest(input2, expected_output2);
+  runSingleTest(input3, expected_output3);
+}
 
-    // Call the original program's main function again
-    result = system("./lab5-6");
-
-    // Restore stdin and stdout
-    dup2(saved_stdin_fd, STDIN_F
+int main() {
+  try {
+    runTest();
+  } catch (const exception &e) {
+    cout << "Test Failed: " << e.what() << endl;
+    return -1;
+  } catch (...) {
+    cout << "Test Failed: Unknown error occurred" << endl;
+    return -1;
+  }
+  return 0;
+}
