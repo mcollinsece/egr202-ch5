@@ -13,6 +13,18 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+    - name: lab5-2
+      id: lab5-2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: lab5-3
+        setup-command: ''
+        command: make clean && make test_lab5-2 && make lab5-2 && ./test_files/test_lab5-2
+        input: ''
+        expected-output: Test passed!
+        comparison-method: contains
+        timeout: 10
+        max-score: 1      
     - name: lab5-3
       id: lab5-3
       uses: classroom-resources/autograding-io-grader@v1
@@ -49,24 +61,12 @@ jobs:
         comparison-method: contains
         timeout: 10
         max-score: 1
-    - name: hw5-15
-      id: hw5-15
-      uses: classroom-resources/autograding-io-grader@v1
-      with:
-        test-name: hw5-15
-        setup-command: ''
-        command: make clean && make test_hw5-15 && make hw5-15 && ./test_files/test_hw5-15
-        input: ''
-        expected-output: Test passed!
-        comparison-method: contains
-        timeout: 10
-        max-score: 1
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
+        LAB5-2_RESULTS: "${{steps.lab5-2.outputs.result}}"
         LAB5-3_RESULTS: "${{steps.lab5-3.outputs.result}}"
         LAB5-6_RESULTS: "${{steps.lab5-6.outputs.result}}"
         HW5-12_RESULTS: "${{steps.hw5-12.outputs.result}}"
-        HW5-15_RESULTS: "${{steps.hw5-15.outputs.result}}"
       with:
-        runners: lab5-3,lab5-6,hw5-12,hw5-15
+        runners: lab5-2 lab5-3,lab5-6,hw5-12

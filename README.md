@@ -22,7 +22,7 @@ make test_lab5-2
 
 # Lab 5-3 Modify
 
-1. **In this lab, you will modify the Heaton Boutique program from Lab 5-2 (code included) to give a 10% discount to members of the store’s Premier Club, and a 5% discount to all other customers. Modify the program instructions appropriately. Use the sample data from Figure 5-28 to test the program.**
+1. **In this lab, you will modify the Heaton Boutique program from Lab 5-2 (code included) to give a 10% discount to members of the store’s Premier Club, and a 5% discount to all other customers. Modify the program instructions appropriately. Use the sample data from Figure 5-28 to test the program. Note that the answers will change slightly from Figure 5-28 because you are adding in a 10% or 5% discount respectively. i.e. if you test 125.0 and No (N), your expected output will be 119.74**
 
 ![Figure 5-28](images/figure5_28.png)
 
@@ -81,16 +81,3 @@ make test_hw5-12
 ./test_files/test_hw5-12
 ```
 ![Figure 5-27](images/figure5_27.png)
-
-# Homework 5-12
-
-**A third-grade teacher at Potter Elementary School wants a program that allows a student to enter the amount of money a customer owes and the amount of money the customer paid. The program should calculate and display the amount of change, as well as how many dollars, quarters, dimes, nickels, and pennies to return to the customer. Display an appropriate message when the amount paid is less than the amount owed.**
-
-1. **Create an IPO chart for the problem, and then desk-check the algorithm three times. For the first desk-check, use 75.34 and 80 as the amount owed and paid, respectively. For the second desk-check, use 39.67 and 50. For the third desk-check, use 10.55 and 9.75.**
-
-2. **List the input, processing, and output items, as well as the algorithm, in a chart similar to the one shown earlier in Figure 5-27. Then code the algorithm into a program.**
-
-3. **Desk-check the program using the same data used to desk-check the algorithm.**
-
-4. **Write the C++ instructions necessary in Replit to display the change in fixed-point notation with two decimal places. Display the remaining output in fixed-point notation 
-with no decimal places. Test the program using the same data used to desk-check the program.**
