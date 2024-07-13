@@ -69,4 +69,4 @@ jobs:
         LAB5-6_RESULTS: "${{steps.lab5-6.outputs.result}}"
         HW5-12_RESULTS: "${{steps.hw5-12.outputs.result}}"
       with:
-        runners: lab5-2 lab5-3,lab5-6,hw5-12
+        runners: lab5-2,lab5-3,lab5-6,hw5-12
